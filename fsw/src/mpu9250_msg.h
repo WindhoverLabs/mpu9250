@@ -221,19 +221,19 @@ typedef struct
     /*! Platform rotation. */
     uint8 Rotation;
     /*! Mag X-axis calibration param scale. */
-    //float MagXScale;
+    float MagXScale;
     /*! Mag Y-axis calibration param scale. */
-    //float MagYScale;
+    float MagYScale;
     /*! Mag Z-axis calibration param scale. */
-    //float MagZScale;
+    float MagZScale;
     /*! Mag X-axis calibration param offset. */
-    //float MagXOffset;
+    float MagXOffset;
     /*! Mag Y-axis calibration param offset. */
-    //float MagYOffset;
+    float MagYOffset;
     /*! Mag Z-axis calibration param offset. */
-    //float MagZOffset;
+    float MagZOffset;
     /*! Mag Platform Rotation */
-    //uint8 MagRotation;
+    uint8 MagRotation;
 } MPU9250_CalibrationMsg_t;
 
 
@@ -259,11 +259,11 @@ typedef struct
     /*! Gyro scale value*/
     uint16 GyroScale;
     /*! Mag X-axis sensitivity adjustment value */
-    //uint8 MagXAdj;
+    float MagXAdj;
     /*! Mag Y-axis sensitivity adjustment value */
-    //uint8 MagYAdj;
+    float MagYAdj;
     /*! Mag Z-axis sensitivity adjustment value */
-    //uint8 MagZAdj;
+    float MagZAdj;
 } MPU9250_ConversionMsg_t;
 
 

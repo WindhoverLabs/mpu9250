@@ -223,7 +223,7 @@ boolean MPU9250_Read_Accel(int16 *X, int16 *Y, int16 *Z);
 **  \returns TRUE for success, FALSE for failure.
 **
 *************************************************************************/
-//boolean MPU9250_Read_Mag(int16 *X, int16 *Y, int16 *Z);
+boolean MPU9250_Read_Mag(int16 *X, int16 *Y, int16 *Z);
 
 /************************************************************************/
 /** \brief Read raw temperature data.
@@ -281,7 +281,7 @@ void MPU9250_Get_Rotation(uint8 *Rotation);
 **  \returns TRUE for success, FALSE for failure.
 **
 *************************************************************************/
-//boolean MPU9250_Read_MagAdj(uint8 *X, uint8 *Y, uint8 *Z);
+boolean MPU9250_Read_MagAdj(uint8 *X, uint8 *Y, uint8 *Z);
 
 /************************************************************************/
 /** \brief Apply the platform rotation to measurements.
@@ -337,7 +337,7 @@ boolean MPU9250_Read_WhoAmI(uint8 *Value);
 **  \returns TRUE for success, FALSE for failure.
 **
 *************************************************************************/
-//boolean MPU9250_Read_MagDeviceID(uint8 *Value);
+boolean MPU9250_Read_MagDeviceID(uint8 *Value);
 
 #ifdef __cplusplus
 }

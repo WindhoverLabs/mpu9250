@@ -64,6 +64,8 @@ extern "C" {
 
 /** \brief Params mutex name. */
 #define MPU9250_MUTEX_PARAMS    ("MPU9250_MUTEX_PARAMS")
+/** \brief 16bit mode: 0.15uTesla/LSB, 100 uTesla == 1 Gauss */
+#define AK8963_RAW_TO_GAUSS    (0.15f / 100.0f)
 
 /************************************************************************
  ** Local Structure Definitions
@@ -97,12 +99,12 @@ typedef struct
     float GyroXOffset;
     float GyroYOffset;
     float GyroZOffset;
-    //float MagXScale;
-    //float MagYScale;
-    //float MagZScale;
-    //float MagXOffset;
-    //float MagYOffset;
-    //float MagZOffset;
+    float MagXScale;
+    float MagYScale;
+    float MagZScale;
+    float MagXOffset;
+    float MagYOffset;
+    float MagZOffset;
 } MPU9250_Params_t;
 
 
@@ -139,8 +141,8 @@ public:
 
     /** \brief Output Data published at the end of cycle */
     PX4_SensorAccelMsg_t SensorAccel;
-    //PX4_SensorMagMsg_t SensorMag;
-    PX4_SensorGyroMsg_t SensorGyro;
+    PX4_SensorMagMsg_t   SensorMag;
+    PX4_SensorGyroMsg_t  SensorGyro;
 
     /** \brief Housekeeping Telemetry for downlink */
     MPU9250_HkTlm_t HkTlm;
@@ -410,6 +412,21 @@ public:
      **
      *************************************************************************/
     boolean ValidateDevice(void);
+
+    /** \brief Initialize the sensitivity adjustment values.
+     **
+     **  \par Description
+     **       This function reads sensitivity adjustment values stored
+     **       in the device fuse ROM.
+     **
+     **  \par Assumptions, External Events, and Notes:
+     **       None
+     **  \returns
+     **  TRUE for success, FALSE for failure.
+     **  \endreturns
+     **
+     *************************************************************************/
+    boolean ReadSensitivityAdjustment(void);
 
 private:
     /************************************************************************/
