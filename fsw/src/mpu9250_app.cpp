@@ -577,6 +577,23 @@ void MPU9250::ProcessAppCmds(CFE_SB_Msg_t* MsgPtr)
                 SendDiag();
                 break;
             }
+            case MPU9250_SET_CALIBRATION_CC:
+            {
+                if(CFE_SUCCESS == UpdateCalibrationValues((MPU9250_SetCalibrationCmd_t *) MsgPtr))
+                {
+                    UpdateParamsFromTable();
+                    HkTlm.usCmdCnt++;
+                    (void) CFE_EVS_SendEvent(MPU9250_CALIBRATE_INF_EID, CFE_EVS_INFORMATION,
+                                  "Calibration values updated");
+                }
+                else
+                {
+                    HkTlm.usCmdErrCnt++;
+                    (void) CFE_EVS_SendEvent(MPU9250_CALIBRATE_ERR_EID, CFE_EVS_ERROR,
+                                  "Calibration values failed to update");
+                }
+                break;
+            }
             default:
             {
                 HkTlm.usCmdErrCnt++;
@@ -1042,6 +1059,36 @@ void MPU9250::UpdateParamsFromTable(void)
         //Diag.Calibration.MagZOffset      = m_Params.MagZOffset; 
     }
     return;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*                                                                 */
+/* Update Calibration Values                                       */
+/*                                                                 */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+int32 MPU9250::UpdateCalibrationValues(MPU9250_SetCalibrationCmd_t *CalibrationMsgPtr) 
+{
+    int32 Status = -1;
+    
+    if(0 != ConfigTblPtr)
+    {
+        ConfigTblPtr->AccXScale = CalibrationMsgPtr->Calibration.AccXScale;
+        ConfigTblPtr->AccYScale = CalibrationMsgPtr->Calibration.AccYScale;
+        ConfigTblPtr->AccZScale = CalibrationMsgPtr->Calibration.AccZScale;
+        ConfigTblPtr->AccXOffset = CalibrationMsgPtr->Calibration.AccXOffset;
+        ConfigTblPtr->AccYOffset = CalibrationMsgPtr->Calibration.AccYOffset;
+        ConfigTblPtr->AccZOffset = CalibrationMsgPtr->Calibration.AccZOffset;
+        ConfigTblPtr->GyroXScale = CalibrationMsgPtr->Calibration.GyroXScale;
+        ConfigTblPtr->GyroYScale = CalibrationMsgPtr->Calibration.GyroYScale;
+        ConfigTblPtr->GyroZScale = CalibrationMsgPtr->Calibration.GyroZScale;
+        ConfigTblPtr->GyroXOffset = CalibrationMsgPtr->Calibration.GyroXOffset;
+        ConfigTblPtr->GyroYOffset = CalibrationMsgPtr->Calibration.GyroYOffset;
+        ConfigTblPtr->GyroZOffset = CalibrationMsgPtr->Calibration.GyroZOffset;
+        
+        Status = CFE_TBL_Modified(ConfigTblHdl);
+    }
+    
+    return Status;
 }
 
 
