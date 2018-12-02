@@ -11,7 +11,7 @@ module.exports = class CfeCdrPlugin extends CdrPlugin {
 
   getContent() {
     var result = {
-      shortDescription: 'MPU9250',
+      shortDescription: 'MPU9250 Inertial Measurement Unit',
       longDescription: 'MPU9250 Inertial Measurement Unit Driver.',
       nodes: {
         main: {
