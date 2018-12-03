@@ -38,6 +38,7 @@ add_airliner_app_def(mpu9250
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_config_utils.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_events.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_msg.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_symbols.c
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_tbldefs.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_version.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_custom.h
