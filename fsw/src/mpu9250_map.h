@@ -383,10 +383,6 @@
 #define MPU9250_ST_INT_FIFO_OFL_MASK        (0x05)
 /** \brief Wake on motion interrupt occurred. */
 #define MPU9250_ST_INT_WOM_MASK             (0x07)
-
-/** \brief Array initializer. */
-#define MPU_InitRegNum                      (20)
-/** \brief Array initializer 2. */
 /** \brief Stop between slave reads. */
 #define MPU9250_I2C_MST_P_NSR               (0x10)
 /** \brief Delay data ready int until external sensor data is loaded. */
