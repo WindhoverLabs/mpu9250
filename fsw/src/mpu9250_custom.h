@@ -50,10 +50,34 @@ extern "C" {
 /************************************************************************
 ** Local Defines
 *************************************************************************/
+#define MPU9250_MAX_FIFO_LENGTH              (110)
 
 /************************************************************************
 ** Local Structure Definitions
 *************************************************************************/
+typedef struct
+{
+    int16 GX; 
+    int16 GY; 
+    int16 GZ; 
+    int16 AX; 
+    int16 AY; 
+    int16 AZ; 
+    int16 MX;
+    int16 MY;
+    int16 MZ;
+    uint8 MST1;
+    uint8 MST2;
+    int16 Temp;
+} MPU9250_Measurement_t;
+
+
+typedef struct
+{
+    MPU9250_Measurement_t Samples[MPU9250_MAX_FIFO_LENGTH];
+    uint32 SampleIntervalUs;
+    int16 SampleCount;
+} MPU9250_SampleQueue_t;
 
 /************************************************************************
 ** External Global Variables
