@@ -884,6 +884,12 @@ boolean MPU9250::ReadDevice(void)
             rawY_f = static_cast<float>(SensorMag.YRaw) * Diag.Conversion.MagYAdj * AK8963_RAW_TO_GAUSS;
             rawZ_f = static_cast<float>(SensorMag.ZRaw) * Diag.Conversion.MagZAdj * AK8963_RAW_TO_GAUSS;
 
+            returnBool = MPU9250_Apply_Mag_Platform_Rotation(&rawX_f, &rawY_f, &rawZ_f);
+            if(FALSE == returnBool)
+            {
+                goto end_of_function;
+            }
+
             /* Apply any user calibration */
             SensorMag.X = (rawX_f - m_Params.MagXOffset) * m_Params.MagXScale;
             SensorMag.Y = (rawY_f - m_Params.MagYOffset) * m_Params.MagYScale;
