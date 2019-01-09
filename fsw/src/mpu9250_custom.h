@@ -62,9 +62,8 @@ typedef struct
     int16 MX;
     int16 MY;
     int16 MZ;
-    uint8 MST1;
-    uint8 MST2;
     int16 Temp;
+    boolean MagDataValid;
 } MPU9250_Measurement_t;
 
 

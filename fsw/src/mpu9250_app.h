@@ -143,6 +143,9 @@ public:
     PX4_SensorAccelMsg_t SensorAccel;
     PX4_SensorMagMsg_t   SensorMag;
     PX4_SensorGyroMsg_t  SensorGyro;
+    
+    /** \brief Sample queue */
+    MPU9250_SampleQueue_t MPU9250_SampleQueue;
 
     /** \brief Housekeeping Telemetry for downlink */
     MPU9250_HkTlm_t HkTlm;
@@ -395,8 +398,12 @@ public:
      **  \par Assumptions, External Events, and Notes:
      **       None
      **
+     **  \returns
+     **  TRUE for success, FALSE for failure.
+     **  \endreturns
+     **
      *************************************************************************/
-    void ReadDevice(void);
+    boolean ReadDevice(void);
 
     /** \brief Initialize the sensitivity adjustment values.
      **
