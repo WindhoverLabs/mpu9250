@@ -319,15 +319,6 @@ int32 MPU9250::InitApp()
         goto MPU9250_InitApp_Exit_Tag;
     }
 
-    returnBool = ValidateDevice();
-    if (FALSE == returnBool)
-    {
-        iStatus = -1;
-        (void) CFE_EVS_SendEvent(MPU9250_INIT_ERR_EID, CFE_EVS_ERROR,
-                "Validate device failed");
-        goto MPU9250_InitApp_Exit_Tag;
-    }
-
     returnBool = MPU9250_SetAccScale(Diag.Conversion.AccScale, &Diag.Conversion.AccDivider);
     if(FALSE == returnBool)
     {
@@ -429,8 +420,6 @@ int32 MPU9250::RcvSchPipeMsg(int32 iBlocking)
         {
             case MPU9250_MEASURE_MID:
             {
-                static uint32 i = 0;
-
                 ReadDevice();
                 SendSensorGyro();
                 SendSensorAccel();
@@ -918,48 +907,6 @@ end_of_function:
     return;
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*                                                                 */
-/* Validate the Device via the Device ID                           */
-/*                                                                 */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-boolean MPU9250::ValidateDevice(void)
-{
-    uint8 value = 0;
-    boolean returnBool =  TRUE;
-    
-    returnBool = MPU9250_Read_WhoAmI(&value);
-    if(FALSE == returnBool)
-    {
-        goto end_of_function;
-    }
-    if (MPU9250_DEVICE_ID != value)
-    {
-        (void) CFE_EVS_SendEvent(MPU9250_VALIDATE_ERR_EID, CFE_EVS_ERROR,
-                "MPU9250 device ID match failed");
-        returnBool = FALSE;
-    }
-
-    returnBool = MPU9250_Read_MagDeviceID(&value);
-    if(FALSE == returnBool)
-    {
-        goto end_of_function;
-    }
-    if (MPU9250_AK8963_ID != value)
-    {
-        (void) CFE_EVS_SendEvent(MPU9250_VALIDATE_ERR_EID, CFE_EVS_ERROR,
-                "AK8963 device ID match failed.  Returned 0x%02hx", value);
-        returnBool = FALSE;
-    }
-
-end_of_function:
-    if(FALSE == returnBool)
-    {
-        (void) CFE_EVS_SendEvent(MPU9250_VALIDATE_ERR_EID, CFE_EVS_ERROR,
-                "MPU9250 validate failed");
-    }
-    return (returnBool);
-}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*                                                                 */
