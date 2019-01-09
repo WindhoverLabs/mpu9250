@@ -1,6 +1,6 @@
 /****************************************************************************
 *
-*   Copyright (c) 2017 Windhover Labs, L.L.C. All rights reserved.
+*   Copyright (c) 2018 Windhover Labs, L.L.C. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
@@ -39,21 +39,17 @@ extern "C" {
 #endif
 
 /************************************************************************
-** Pragmas
-*************************************************************************/
-
-/************************************************************************
 ** Includes
 *************************************************************************/
 #include "cfe.h"
 
 /************************************************************************
-** Local Defines
+** Defines
 *************************************************************************/
 #define MPU9250_MAX_FIFO_LENGTH              (110)
 
 /************************************************************************
-** Local Structure Definitions
+** Structure Definitions
 *************************************************************************/
 typedef struct
 {
@@ -111,7 +107,6 @@ void MPU9250_Custom_InitData(void);
 **
 *************************************************************************/
 boolean MPU9250_Custom_Init(void);
-
 
 /************************************************************************/
 /** \brief Custom function to uninitialize custom device(s).
@@ -331,8 +326,9 @@ boolean MPU9250_Read_WhoAmI(uint8 *Value);
 *************************************************************************/
 boolean MPU9250_Read_Mag_WhoAmI(uint8 *Value);
 
+
 #ifdef __cplusplus
 }
 #endif 
 
-#endif /* RGBLED_CUSTOM_H */
+#endif /* MPU9250_CUSTOM_H */
