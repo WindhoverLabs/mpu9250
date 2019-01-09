@@ -187,90 +187,28 @@ boolean MPU9250_SetAccScale(uint8 Scale, float *AccDivider);
 boolean MPU9250_SetGyroScale(uint32 Scale, float *GyroDivider);
 
 /************************************************************************/
-/** \brief Read raw gyro data.
+/** \brief Read raw gyro, accel, mag, and temperature data.
 **
 **  \par Description
-**       This function reads raw X-axis, Y-axis, and Z-axis gyro data.
+**       This function reads raw X-axis, Y-axis, and Z-axis gyro, accel, 
+**       mag data from the MPU9250 fifo queue.
 **
 **  \par Assumptions, External Events, and Notes:
 **       Initialization must be completed before this function is 
 **       called.
 **
-**  \param [out]   X      Raw X-axis value.
-**
-**  \param [out]   Y      Raw Y-axis value.
-**
-**  \param [out]   Z      Raw Z-axis value.
+**  \param [in/out]   SampleQueue      Raw gyro, accel, and mag samples.
 **
 **  \returns TRUE for success, FALSE for failure.
 **
 *************************************************************************/
-boolean MPU9250_Read_Gyro(int16 *X, int16 *Y, int16 *Z);
-
-/************************************************************************/
-/** \brief Read raw accel data.
-**
-**  \par Description
-**       This function reads raw X-axis, Y-axis, and Z-axis accel data.
-**
-**  \par Assumptions, External Events, and Notes:
-**       Initialization must be completed before this function is 
-**       called. 
-**
-**  \param [out]   X      Raw X-axis value.
-**
-**  \param [out]   Y      Raw Y-axis value.
-**
-**  \param [out]   Z      Raw Z-axis value.
-**
-**  \returns TRUE for success, FALSE for failure.
-**
-*************************************************************************/
-boolean MPU9250_Read_Accel(int16 *X, int16 *Y, int16 *Z);
-
-/************************************************************************/
-/** \brief Read raw mag data.
-**
-**  \par Description
-**       This function reads raw X-axis, Y-axis, and Z-axis mag data.
-**
-**  \par Assumptions, External Events, and Notes:
-**       Initialization must be completed before this function is 
-**       called. 
-**
-**  \param [out]   X      Raw X-axis value.
-**
-**  \param [out]   Y      Raw Y-axis value.
-**
-**  \param [out]   Z      Raw Z-axis value.
-**
-**  \returns TRUE for success, FALSE for failure.
-**
-*************************************************************************/
-boolean MPU9250_Read_Mag(int16 *X, int16 *Y, int16 *Z);
-
-/************************************************************************/
-/** \brief Read raw temperature data.
-**
-**  \par Description
-**       This function reads raw temperature data.
-**
-**  \par Assumptions, External Events, and Notes:
-**       Initialization must be completed before this function is 
-**       called. 
-**
-**  \param [out]   Temp    Raw temperature value.
-**
-**  \returns TRUE for success, FALSE for failure.
-**
-*************************************************************************/
-boolean MPU9250_Read_Temp(uint16 *Temp);
+boolean MPU9250_Measure(MPU9250_SampleQueue_t *SampleQueue);
 
 /************************************************************************/
 /** \brief Get platform rotation.
 **
 **  \par Description
-**       This function reads raw temperature data.
+**       This function returns the current platform rotation.
 **
 **  \par Assumptions, External Events, and Notes:
 **       None.
@@ -280,11 +218,19 @@ boolean MPU9250_Read_Temp(uint16 *Temp);
 *************************************************************************/
 void MPU9250_Get_Rotation(uint8 *Rotation);
 
-/* TODO */
-//boolean MPU9250_Read_ImuStatus(boolean *WOM, boolean *FifoOvflw, boolean *Fsync, boolean *DataReady);
-
-/* TODO */
-//boolean MPU9250_Read_MagStatus(boolean *Overrun, boolean *DataReady, boolean *Overflow, boolean *Output16Bit);
+/************************************************************************/
+/** \brief Get mag platform rotation.
+**
+**  \par Description
+**       This function returns the current mag platform rotation.
+**
+**  \par Assumptions, External Events, and Notes:
+**       None.
+**
+**  \param [out]   Rotation    The platform rotation.
+**
+*************************************************************************/
+void MPU9250_Get_Mag_Rotation(uint8 *Rotation);
 
 /************************************************************************/
 /** \brief Read the mag sensitivity adjustment values.
@@ -330,6 +276,28 @@ boolean MPU9250_Read_MagAdj(uint8 *X, uint8 *Y, uint8 *Z);
 boolean MPU9250_Apply_Platform_Rotation(float *X, float *Y, float *Z);
 
 /************************************************************************/
+/** \brief Apply the platform rotation to mag measurements.
+**
+**  \par Description
+**       This applies any required platform rotation to the X, Y, and Z
+**       measurements.
+**
+**  \par Assumptions, External Events, and Notes:
+**       Initialization must be completed before this function is 
+**       called. 
+**
+**  \param [in/out]   X      X-axis value.
+**
+**  \param [in/out]   Y      Y-axis value.
+**
+**  \param [in/out]   Z      Z-axis value.
+**
+**  \returns TRUE for success, FALSE for failure.
+**
+*************************************************************************/
+boolean MPU9250_Apply_Mag_Platform_Rotation(float *X, float *Y, float *Z);
+
+/************************************************************************/
 /** \brief Returns the device ID of the MPU9250.
 **
 **  \par Description
@@ -361,7 +329,7 @@ boolean MPU9250_Read_WhoAmI(uint8 *Value);
 **  \returns TRUE for success, FALSE for failure.
 **
 *************************************************************************/
-boolean MPU9250_Read_MagDeviceID(uint8 *Value);
+boolean MPU9250_Read_Mag_WhoAmI(uint8 *Value);
 
 #ifdef __cplusplus
 }
