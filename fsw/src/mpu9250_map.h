@@ -269,6 +269,9 @@
 /* I2C master status bits. */
 #define MPU9250_I2C_SLV4_DONE               (0x40)
 
+/* Interrupt status bits. */
+#define MPU9250_INT_STATUS_FIFO_OVERFLOW    (0x10)
+
 #define MPU9250_MPU_CLK_SEL_PLLGYROX        (0x01)
 #define MPU9250_MPU_CLK_SEL_PLLGYROZ        (0x03)
 #define MPU9250_MPU_EXT_SYNC_GYROX          (0x02)

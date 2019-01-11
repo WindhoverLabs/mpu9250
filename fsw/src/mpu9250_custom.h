@@ -291,40 +291,6 @@ boolean MPU9250_Apply_Platform_Rotation(float *X, float *Y, float *Z);
 *************************************************************************/
 boolean MPU9250_Apply_Mag_Platform_Rotation(float *X, float *Y, float *Z);
 
-/************************************************************************/
-/** \brief Returns the device ID of the MPU9250.
-**
-**  \par Description
-**       This returns the device ID for identification.
-**
-**  \par Assumptions, External Events, and Notes:
-**       Initialization must be completed before this function is 
-**       called. 
-**
-**  \param [out]   Value      Device ID value.
-**
-**  \returns TRUE for success, FALSE for failure.
-**
-*************************************************************************/
-boolean MPU9250_Read_WhoAmI(uint8 *Value);
-
-/************************************************************************/
-/** \brief Returns the device ID of the Mag (AK8963).
-**
-**  \par Description
-**       This returns the device ID for identification.
-**
-**  \par Assumptions, External Events, and Notes:
-**       Initialization must be completed before this function is 
-**       called. 
-**
-**  \param [out]   Value      Device ID value.
-**
-**  \returns TRUE for success, FALSE for failure.
-**
-*************************************************************************/
-boolean MPU9250_Read_Mag_WhoAmI(uint8 *Value);
-
 
 #ifdef __cplusplus
 }
