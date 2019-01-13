@@ -32,6 +32,7 @@
 *****************************************************************************/
 
 #include "mpu9250_custom_stubs.h"
+#include "mpu9250_custom.h"
 
 MPU9250_Custom_Returns_t MPU9250_Custom_Returns;
 
