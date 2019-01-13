@@ -779,7 +779,7 @@ boolean MPU9250::ReadDevice(void)
         SensorAccel.XRaw = MPU9250_SampleQueue.Samples[i].AX;
         SensorAccel.YRaw = MPU9250_SampleQueue.Samples[i].AY;
         SensorAccel.ZRaw = MPU9250_SampleQueue.Samples[i].AZ;
-        rawTemp = MPU6050_SampleQueue.Samples[i].Temp;
+        rawTemp = MPU9250_SampleQueue.Samples[i].Temp;
 
         rawX_f = SensorGyro.XRaw;
         rawY_f = SensorGyro.YRaw;
