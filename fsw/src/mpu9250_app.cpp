@@ -284,6 +284,7 @@ int32 MPU9250::InitApp()
     int32  iStatus   = CFE_SUCCESS;
     int8   hasEvents = 0;
     boolean returnBool = TRUE;
+    int i = 0;
 
     iStatus = InitEvent();
     if (iStatus != CFE_SUCCESS)
@@ -310,12 +311,25 @@ int32 MPU9250::InitApp()
 
     InitData();
 
-    returnBool = MPU9250_Custom_Init();
+    for(i = 0; i < MPU9250_CUSTOM_INIT_RETRIES; ++i)
+    {
+        returnBool = MPU9250_Custom_Init();
+        if(TRUE == returnBool)
+        {
+            break;
+        }
+        else
+        {
+            CFE_EVS_SendEvent(MPU9250_INIT_ERR_EID, CFE_EVS_ERROR,
+                "Custom init failed");
+        }
+    }
+
     if (FALSE == returnBool)
     {
         iStatus = -1;
         CFE_EVS_SendEvent(MPU9250_INIT_ERR_EID, CFE_EVS_ERROR,
-                "Custom init failed");
+                "Custom init failed all retry attempts");
         goto MPU9250_InitApp_Exit_Tag;
     }
 

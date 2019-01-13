@@ -67,6 +67,8 @@ extern "C" {
 #define MPU9250_MUTEX_PARAMS    ("MPU9250_MUTEX_PARAMS")
 /** \brief 16bit mode: 0.15uTesla/LSB, 100 uTesla == 1 Gauss */
 #define AK8963_RAW_TO_GAUSS    (0.15f / 100.0f)
+/** \brief retry attempts for custom initialization. */
+#define MPU9250_CUSTOM_INIT_RETRIES (2)
 
 /************************************************************************
  ** Local Structure Definitions
