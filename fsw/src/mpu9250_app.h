@@ -54,6 +54,7 @@ extern "C" {
 #include "mpu9250_msg.h"
 #include "mpu9250_events.h"
 #include "mpu9250_tbldefs.h"
+#include "mpu9250_custom.h"
 #include "px4_msgs.h"
 #include "math/filters/LowPassFilter2p.hpp"
 #include "math/Integrator.hpp"
