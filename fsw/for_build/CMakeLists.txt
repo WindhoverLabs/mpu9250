@@ -30,7 +30,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #############################################################################
-add_airliner_app_def(mpu9250
+buildliner_add_app_def(mpu9250
     FILE MPU9250
     SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/mpu9250_app.cpp
@@ -53,7 +53,7 @@ add_airliner_app_def(mpu9250
         ${PROJECT_SOURCE_DIR}/apps/mpu9250/fsw/platform_inc
 )
 
-add_airliner_app_unit_test(mpu9250-ut
+buildliner_add_app_unit_test(mpu9250-ut
     UTASSERT
     NO_HELGRIND
     NO_MASSIF
